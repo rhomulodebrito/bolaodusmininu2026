@@ -1,0 +1,35 @@
+{
+  "name": "bolao-copa-2026",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "lucide-react": "latest",
+    "recharts": "latest",
+    "xlsx": "latest",
+    "jspdf": "latest",
+    "jspdf-autotable": "latest",
+    "clsx": "latest",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "postcss": "latest",
+    "autoprefixer": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": ["core-js"]
+  }
+}

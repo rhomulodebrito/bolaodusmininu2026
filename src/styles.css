@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #020b13;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+@layer components {
+  .sidebar-shell {
+    @apply fixed inset-y-0 left-0 z-40 w-[230px] flex-col border-r border-white/10 bg-[#03101d]/95 shadow-2xl;
+  }
+
+  .hero-shell {
+    @apply overflow-hidden rounded-lg border border-white/10 bg-cover bg-center shadow-2xl;
+  }
+
+  .glass-card {
+    @apply rounded-lg border border-white/10 bg-[#061423]/90 text-white shadow-2xl backdrop-blur;
+  }
+
+  .btn-light {
+    @apply inline-flex h-10 items-center gap-2 rounded-md bg-white/10 px-3 text-sm font-bold text-white shadow-sm transition hover:bg-white/15;
+  }
+
+  .btn-gold {
+    @apply inline-flex h-10 items-center gap-2 rounded-md bg-amber-300 px-3 text-sm font-black text-slate-950 shadow-sm transition hover:bg-amber-200 disabled:opacity-70;
+  }
+
+  .btn-dark {
+    @apply inline-flex h-10 items-center gap-2 rounded-md border border-white/15 bg-black/35 px-3 text-sm font-bold text-white shadow-sm transition hover:bg-white/10;
+  }
+
+  .btn-ghost {
+    @apply inline-flex h-9 items-center rounded-md border border-white/10 bg-white/5 px-3 text-sm font-bold text-slate-200 transition hover:bg-white/10;
+  }
+
+  .btn-danger {
+    @apply inline-flex h-10 items-center rounded-md bg-rose-600 px-4 text-sm font-bold text-white transition hover:bg-rose-700;
+  }
+
+  .chip {
+    @apply rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm font-bold text-slate-200 transition hover:bg-white/10;
+  }
+
+  .chip-active {
+    @apply border-amber-300 bg-amber-300 text-slate-950 hover:bg-amber-200;
+  }
+
+  .input {
+    @apply h-11 w-full rounded-md border border-white/10 bg-white/5 px-3 text-sm text-white outline-none ring-amber-300 transition placeholder:text-slate-500 focus:ring-2;
+  }
+
+  .score-input {
+    @apply h-9 w-14 rounded-md border border-white/10 bg-white/5 text-center text-sm font-black text-white outline-none ring-amber-300 transition focus:ring-2;
+  }
+
+  .data-table {
+    @apply w-full min-w-[720px] border-separate border-spacing-0 text-left text-sm;
+  }
+
+  .data-table th {
+    @apply border-b border-white/10 bg-white/[0.03] px-3 py-3 text-xs font-black uppercase text-slate-400;
+  }
+
+  .data-table td {
+    @apply border-b border-white/10 px-3 py-3 align-middle text-slate-100;
+  }
+
+  .data-table tbody tr {
+    @apply transition hover:bg-amber-300/10;
+  }
+
+  .status {
+    @apply inline-flex whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-black;
+  }
+
+  .match-tile {
+    @apply rounded-lg border border-white/10 bg-white/[0.04] p-4 transition hover:border-amber-300/40 hover:bg-white/[0.06];
+  }
+
+  .score-pill {
+    @apply shrink-0 rounded-md bg-amber-300 px-3 py-1 text-lg font-black text-slate-950;
+  }
+
+  .avatar-card {
+    @apply relative flex min-w-0 flex-col items-center rounded-lg border border-white/10 bg-white/[0.04] p-3 text-center transition hover:-translate-y-1 hover:border-amber-300/50 hover:bg-white/[0.07];
+  }
+
+  .avatar-card-image {
+    @apply aspect-square w-full max-w-[132px] rounded-full border-4 border-amber-300 object-cover shadow-2xl;
+  }
+
+  .avatar-card-rank {
+    @apply absolute right-2 top-2 rounded-full bg-amber-300 px-2 py-0.5 text-xs font-black text-slate-950 shadow-lg;
+  }
+
+  .stadium-card {
+    background-image: linear-gradient(rgba(6, 20, 35, .9), rgba(6, 20, 35, .94)), url("https://upload.wikimedia.org/wikipedia/commons/3/36/2018_World_Cup_Final_-_France_v_Croatia.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .fifa-moment-card {
+    @apply relative flex min-h-[260px] overflow-hidden rounded-lg border border-white/10 bg-cover p-4 shadow-2xl transition hover:-translate-y-1 hover:border-amber-300/60;
+  }
+
+  .fifa-moment-card::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10;
+  }
+
+  .fifa-moment-card > * {
+    @apply relative z-10;
+  }
+}
