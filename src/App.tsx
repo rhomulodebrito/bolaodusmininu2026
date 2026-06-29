@@ -164,6 +164,13 @@ const localVerifiedResults: Record<string, Score> = {
   "uruguai-espanha": { home: 0, away: 1 },
   "noruega-franca": { home: 1, away: 4 },
   "senegal-iraque": { home: 5, away: 0 },
+  "argelia-austria": { home: 3, away: 3 },
+  "jordania-argentina": { home: 1, away: 3 },
+  "colombia-portugal": { home: 0, away: 0 },
+  "rdcongo-uzbequistao": { home: 3, away: 1 },
+  "panama-inglaterra": { home: 0, away: 2 },
+  "croacia-gana": { home: 2, away: 1 },
+  "africadosul-canada": { home: 0, away: 1 },
 };
 
 const pendingGoogleFixtureKeys = new Set<string>([
@@ -450,7 +457,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "group-stage-results-2026-06-27";
+const DATA_VERSION = "group-final-results-2026-06-29";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {
