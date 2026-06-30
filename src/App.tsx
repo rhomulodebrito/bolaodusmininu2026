@@ -88,6 +88,12 @@ const fifaMomentCards = [
 ];
 
 const worldCupGallery = [
+  { title: "Brasil unido", image: "/moments/brasil-elenco-festa.png", position: "50% 28%" },
+  { title: "Paraguai comemora", image: "/moments/paraguai-comemoracao.png", position: "48% 28%" },
+  { title: "Joao Pedro vibra", image: "/moments/brasil-joao-pedro.png", position: "50% 30%" },
+  { title: "Vini Jr. decisivo", image: "/moments/brasil-vini-capa.png", position: "46% 20%" },
+  { title: "Canadá em festa", image: "/moments/canada-comemoracao.png", position: "46% 24%" },
+  { title: "Salah pelo Egito", image: "/moments/egito-salah.png", position: "44% 34%" },
   { title: "Mbappe pela Franca", image: "/moments/franca-mbappe.png", position: "58% 22%" },
   { title: "Haaland pela Noruega", image: "/moments/noruega-haaland.png", position: "50% 18%" },
   { title: "Senegal em destaque", image: "/moments/senegal-comemoracao.png", position: "52% 20%" },
@@ -106,7 +112,7 @@ const worldCupGallery = [
 ];
 
 const tabBackgroundImages: Record<string, string> = {
-  dashboard: "/moments/franca-mbappe.png",
+  dashboard: "/moments/brasil-vini-capa.png",
   ranking: "/moments/noruega-haaland.png",
   participant: "/moments/caboverde-comemoracao.png",
   matches: "/moments/uruguai-arabia.png",
@@ -118,7 +124,7 @@ const tabBackgroundImages: Record<string, string> = {
 };
 
 const tabBackgroundPositions: Record<string, string> = {
-  dashboard: "58% 18%",
+  dashboard: "46% 20%",
   ranking: "50% 18%",
   participant: "46% 25%",
   matches: "48% 42%",
@@ -171,6 +177,9 @@ const localVerifiedResults: Record<string, Score> = {
   "panama-inglaterra": { home: 0, away: 2 },
   "croacia-gana": { home: 2, away: 1 },
   "africadosul-canada": { home: 0, away: 1 },
+  "brasil-japao": { home: 2, away: 1 },
+  "alemanha-paraguai": { home: 1, away: 1 },
+  "holanda-marrocos": { home: 1, away: 1 },
 };
 
 const pendingGoogleFixtureKeys = new Set<string>([
@@ -457,7 +466,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "group-final-results-2026-06-29";
+const DATA_VERSION = "knockout-second-roger-2026-06-30";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {
@@ -565,6 +574,7 @@ export default function App() {
   }));
 
   const exactLeader = ranking.slice().sort((a, b) => b.exactScores - a.exactScores)[0];
+  const exactColdLeader = ranking.slice().sort((a, b) => a.exactScores - b.exactScores || a.totalPoints - b.totalPoints)[0];
   const streakLeader = ranking.slice().sort((a, b) => b.streak - a.streak)[0];
   const errorLeader = ranking.slice().sort((a, b) => b.errors - a.errors)[0];
   const fallingLeader = ranking
@@ -605,6 +615,13 @@ export default function App() {
       note: `${errorLeader?.errors ?? 0} palpites sem pontuar`,
       icon: Sparkles,
       tone: "text-rose-300 bg-rose-300/15",
+    },
+    {
+      label: "Crava nada",
+      value: exactColdLeader?.participant.name ?? "-",
+      note: `${exactColdLeader?.exactScores ?? 0} placares exatos até agora`,
+      icon: ShieldCheck,
+      tone: "text-slate-100 bg-slate-300/15",
     },
     {
       label: "De mal a pior",

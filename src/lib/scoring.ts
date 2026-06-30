@@ -72,6 +72,7 @@ export function buildRanking(
   official: LongTermOfficial,
 ): RankingRow[] {
   const completedMatches = matches.filter((match) => match.result);
+  const latestCompletedRound = completedMatches.length ? Math.max(...completedMatches.map((match) => match.round)) : 0;
 
   const previous = participants
     .map((participant) => {
@@ -79,7 +80,7 @@ export function buildRanking(
         .filter((prediction) => prediction.participantId === participant.id)
         .map((prediction) => {
           const match = matches.find((item) => item.id === prediction.matchId);
-          if (!match || !match.result || match.round === Math.max(...matches.map((item) => item.round))) return 0;
+          if (!match || !match.result || match.round >= latestCompletedRound) return 0;
           return scorePrediction(prediction, match).points;
         })
         .reduce((sum, value) => sum + value, 0);

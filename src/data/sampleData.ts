@@ -330,7 +330,7 @@ const knockoutRows = [
   ["Mata-mata", "Holanda", "Marrocos"],
 ] as const;
 
-const knockoutResults = ["0x1"];
+const knockoutResults = ["0x1", "2x1", "1x1", "1x1"];
 
 const knockoutMatches: Match[] = knockoutRows.map(([stage, home, away], index) => ({
   id: `KO-${index + 1}`,
@@ -356,10 +356,44 @@ const knockoutPredictions: Prediction[] = rawKnockoutPredictions.flatMap((row, m
   })),
 );
 
+const knockoutSecondRows = [
+  ["Mata-mata", "Costa do Marfim", "Noruega"],
+  ["Mata-mata", "França", "Suécia"],
+  ["Mata-mata", "México", "Equador"],
+  ["Mata-mata", "Inglaterra", "RD Congo"],
+  ["Mata-mata", "Bélgica", "Senegal"],
+  ["Mata-mata", "Estados Unidos", "Bósnia e Herzegovina"],
+] as const;
+
+const knockoutSecondMatches: Match[] = knockoutSecondRows.map(([stage, home, away], index) => ({
+  id: `KO2-${index + 1}`,
+  round: matches.length + secondRoundMatches.length + thirdRoundMatches.length + knockoutMatches.length + index + 1,
+  group: stage,
+  home: team(home),
+  away: team(away),
+}));
+
+const rawKnockoutSecondPredictions: Array<Record<string, string>> = [
+  { Rhômulo: "1x2", Rhenan: "1x2", Zanuto: "2x3", Amim: "1x1", JP: "1x2", Roger: "0x1" },
+  { Rhômulo: "3x1", Rhenan: "3x0", Zanuto: "4x0", Amim: "2x0", JP: "3x0", Roger: "2x0" },
+  { Rhômulo: "1x1", Rhenan: "1x2", Zanuto: "2x1", Amim: "2x1", JP: "1x1", Roger: "0x0" },
+  { Rhômulo: "2x0", Rhenan: "2x0", Zanuto: "3x0", Amim: "2x1", JP: "3x0", Roger: "1x0" },
+  { Rhômulo: "1x2", Rhenan: "1x1", Zanuto: "2x1", Amim: "2x2", JP: "1x1", Roger: "1x0" },
+  { Rhômulo: "3x1", Rhenan: "2x0", Zanuto: "2x1", Amim: "3x1", JP: "2x0", Roger: "1x1" },
+];
+
+const knockoutSecondPredictions: Prediction[] = rawKnockoutSecondPredictions.flatMap((row, matchIndex) =>
+  Object.entries(row).map(([name, value]) => ({
+    participantId: participants.find((participant) => participant.name === name)!.id,
+    matchId: knockoutSecondMatches[matchIndex].id,
+    score: score(value),
+  })),
+);
+
 export const initialData: PoolData = {
   participants,
-  matches: [...matches, ...secondRoundMatches, ...thirdRoundMatches, ...knockoutMatches],
-  predictions: [...predictions, ...secondRoundPredictions, ...thirdRoundPredictions, ...knockoutPredictions],
+  matches: [...matches, ...secondRoundMatches, ...thirdRoundMatches, ...knockoutMatches, ...knockoutSecondMatches],
+  predictions: [...predictions, ...secondRoundPredictions, ...thirdRoundPredictions, ...knockoutPredictions, ...knockoutSecondPredictions],
   longTermPicks: [
     { participantId: "willie", champion: "França", runnerUp: "Espanha", topScorer: "Mbappé", brazilPosition: "Semifinal" },
     { participantId: "rhomulo", champion: "França", runnerUp: "Brasil", topScorer: "Mbappé", brazilPosition: "Final (Vice)" },
