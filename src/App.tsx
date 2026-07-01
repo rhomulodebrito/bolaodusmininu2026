@@ -65,29 +65,40 @@ const avatarImages: Record<string, string> = {
 };
 const fifaMomentCards = [
   {
-    title: "Mbappe em foco",
-    label: "Momentos da Copa",
+    title: "Brasil em alta",
+    label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup",
-    image: "/moments/franca-mbappe.png",
-    position: "58% 22%",
+    image: "/moments/brasil-gol-japao.png",
+    position: "48% 28%",
   },
   {
-    title: "Haaland pela Noruega",
-    label: "Jogos e resultados",
+    title: "Brasil comemora",
+    label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
-    image: "/moments/noruega-haaland.png",
-    position: "50% 18%",
+    image: "/moments/brasil-comemora-japao.png",
+    position: "50% 28%",
   },
   {
-    title: "Senegal em destaque",
-    label: "Notícias da Copa",
+    title: "Haaland decide",
+    label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/articles",
-    image: "/moments/senegal-comemoracao.png",
-    position: "52% 20%",
+    image: "/moments/noruega-haaland-bracos.png",
+    position: "50% 24%",
+  },
+  {
+    title: "França em campo",
+    label: "Último momento",
+    href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    image: "/moments/franca-suecia-bike.png",
+    position: "50% 38%",
   },
 ];
 
 const worldCupGallery = [
+  { title: "Brasil em alta", image: "/moments/brasil-gol-japao.png", position: "48% 28%" },
+  { title: "Brasil comemora", image: "/moments/brasil-comemora-japao.png", position: "50% 28%" },
+  { title: "Haaland decide", image: "/moments/noruega-haaland-bracos.png", position: "50% 24%" },
+  { title: "França em campo", image: "/moments/franca-suecia-bike.png", position: "50% 38%" },
   { title: "Brasil unido", image: "/moments/brasil-elenco-festa.png", position: "50% 28%" },
   { title: "Paraguai comemora", image: "/moments/paraguai-comemoracao.png", position: "48% 28%" },
   { title: "Joao Pedro vibra", image: "/moments/brasil-joao-pedro.png", position: "50% 30%" },
@@ -112,7 +123,7 @@ const worldCupGallery = [
 ];
 
 const tabBackgroundImages: Record<string, string> = {
-  dashboard: "/moments/brasil-vini-capa.png",
+  dashboard: "/moments/brasil-gol-japao.png",
   ranking: "/moments/noruega-haaland.png",
   participant: "/moments/caboverde-comemoracao.png",
   matches: "/moments/uruguai-arabia.png",
@@ -124,7 +135,7 @@ const tabBackgroundImages: Record<string, string> = {
 };
 
 const tabBackgroundPositions: Record<string, string> = {
-  dashboard: "46% 20%",
+  dashboard: "48% 28%",
   ranking: "50% 18%",
   participant: "46% 25%",
   matches: "48% 42%",
@@ -180,10 +191,19 @@ const localVerifiedResults: Record<string, Score> = {
   "brasil-japao": { home: 2, away: 1 },
   "alemanha-paraguai": { home: 1, away: 1 },
   "holanda-marrocos": { home: 1, away: 1 },
+  "costadomarfim-noruega": { home: 1, away: 2 },
+  "franca-suecia": { home: 3, away: 0 },
 };
 
 const pendingGoogleFixtureKeys = new Set<string>([
 ]);
+
+const manualPreviousPositions: Record<string, number> = {
+  rhomulo: 9,
+  roger: 6,
+  rhenan: 7,
+  willie: 8,
+};
 
 function cx(...classes: Array<string | false | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -466,7 +486,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "knockout-second-roger-2026-06-30";
+const DATA_VERSION = "knockout-second-results-2026-06-30";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {
@@ -522,7 +542,11 @@ export default function App() {
   const [apiFootballSeason, setApiFootballSeason] = useState(() => localStorage.getItem("api-football-season") ?? "2026");
 
   const ranking = useMemo(
-    () => buildRanking(data.participants, data.matches, data.predictions, data.longTermPicks, data.longTermOfficial),
+    () =>
+      buildRanking(data.participants, data.matches, data.predictions, data.longTermPicks, data.longTermOfficial).map((row) => ({
+        ...row,
+        previousPosition: manualPreviousPositions[row.participant.id] ?? row.previousPosition,
+      })),
     [data],
   );
   const groups = ["Todos", ...Array.from(new Set(data.matches.map((match) => match.group)))];
@@ -859,7 +883,7 @@ export default function App() {
           </div>
         </div>
         <nav className="mt-2 grid gap-1 px-3">
-          <SideNav icon={BarChart3} active={tab === "dashboard"} onClick={() => setTab("dashboard")}>Home/Dashboard</SideNav>
+          <SideNav icon={BarChart3} active={tab === "dashboard"} onClick={() => setTab("dashboard")}>Home</SideNav>
           <SideNav icon={Trophy} active={tab === "ranking"} onClick={() => setTab("ranking")}>Ranking</SideNav>
           <SideNav icon={Activity} active={tab === "matches"} onClick={() => setTab("matches")}>Jogos</SideNav>
           <SideNav icon={FileSpreadsheet} active={tab === "predictions"} onClick={() => setTab("predictions")}>Palpites</SideNav>
@@ -879,7 +903,7 @@ export default function App() {
       <div className="min-w-0 flex-1 lg:pl-[230px]">
         <div className="sticky top-0 z-30 border-b border-white/10 bg-[#061423]/90 px-4 py-3 backdrop-blur lg:hidden">
           <nav className="flex gap-2 overflow-x-auto">
-            <IconButton icon={BarChart3} active={tab === "dashboard"} onClick={() => setTab("dashboard")}>Home/Dashboard</IconButton>
+            <IconButton icon={BarChart3} active={tab === "dashboard"} onClick={() => setTab("dashboard")}>Home</IconButton>
             <IconButton icon={Trophy} active={tab === "ranking"} onClick={() => setTab("ranking")}>Ranking</IconButton>
             <IconButton icon={Medal} active={tab === "medals"} onClick={() => setTab("medals")}>Medalhas</IconButton>
             <IconButton icon={Sparkles} active={tab === "longTerm"} onClick={() => setTab("longTerm")}>Longo Prazo</IconButton>
@@ -901,7 +925,7 @@ export default function App() {
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <p className="text-sm font-black uppercase tracking-[0.28em] text-amber-300">Copa do Mundo 2026</p>
-                    <p className="mt-2 text-xs font-black uppercase tracking-[0.22em] text-slate-300">Home / Dashboard</p>
+                    <p className="mt-2 text-xs font-black uppercase tracking-[0.22em] text-slate-300">Home</p>
                     <h1 className="mt-3 max-w-4xl text-4xl font-black uppercase leading-none sm:text-6xl">Bolão Dus Mininu Copa 2026</h1>
                     <p className="mt-4 max-w-xl text-base font-semibold text-slate-200">
                       Acompanhe palpites, resultados, classificação e estatísticas em tempo real.
@@ -950,7 +974,7 @@ export default function App() {
 
             <Card className="overflow-hidden">
               <SectionTitle title="Momentos da Copa" action={<button className="btn-ghost" onClick={() => setTab("moments")}>Abrir galeria</button>} />
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {fifaMomentCards.map((card) => (
                   <a
                     key={card.title}
@@ -1135,28 +1159,10 @@ export default function App() {
                 {worldCupGallery.map((item) => (
                   <figure key={item.image} className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] shadow-2xl">
                     <img src={item.image} alt={item.title} className="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" style={{ objectPosition: item.position }} />
-                    <figcaption className="border-t border-white/10 px-4 py-3 text-sm font-black text-white">{item.title}</figcaption>
                   </figure>
                 ))}
               </div>
             </Card>
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {fifaMomentCards.map((card) => (
-                <a
-                  key={card.title}
-                  href={card.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="fifa-moment-card"
-                  style={{ backgroundImage: `linear-gradient(180deg, rgba(2,11,19,.08), rgba(2,11,19,.86)), url(${card.image})`, backgroundPosition: card.position }}
-                >
-                  <span className="rounded-full bg-white/90 px-2 py-1 text-xs font-black text-slate-950">FIFA</span>
-                  <span className="mt-auto text-lg font-black text-white">{card.title}</span>
-                  <span className="text-sm font-bold text-amber-300">{card.label}</span>
-                </a>
-              ))}
-            </div>
           </div>
         )}
 

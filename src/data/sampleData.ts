@@ -365,21 +365,24 @@ const knockoutSecondRows = [
   ["Mata-mata", "Estados Unidos", "Bósnia e Herzegovina"],
 ] as const;
 
+const knockoutSecondResults = ["1x2", "3x0"];
+
 const knockoutSecondMatches: Match[] = knockoutSecondRows.map(([stage, home, away], index) => ({
   id: `KO2-${index + 1}`,
   round: matches.length + secondRoundMatches.length + thirdRoundMatches.length + knockoutMatches.length + index + 1,
   group: stage,
   home: team(home),
   away: team(away),
+  result: knockoutSecondResults[index] ? score(knockoutSecondResults[index]) : undefined,
 }));
 
 const rawKnockoutSecondPredictions: Array<Record<string, string>> = [
-  { Rhômulo: "1x2", Rhenan: "1x2", Zanuto: "2x3", Amim: "1x1", JP: "1x2", Roger: "0x1" },
-  { Rhômulo: "3x1", Rhenan: "3x0", Zanuto: "4x0", Amim: "2x0", JP: "3x0", Roger: "2x0" },
-  { Rhômulo: "1x1", Rhenan: "1x2", Zanuto: "2x1", Amim: "2x1", JP: "1x1", Roger: "0x0" },
-  { Rhômulo: "2x0", Rhenan: "2x0", Zanuto: "3x0", Amim: "2x1", JP: "3x0", Roger: "1x0" },
-  { Rhômulo: "1x2", Rhenan: "1x1", Zanuto: "2x1", Amim: "2x2", JP: "1x1", Roger: "1x0" },
-  { Rhômulo: "3x1", Rhenan: "2x0", Zanuto: "2x1", Amim: "3x1", JP: "2x0", Roger: "1x1" },
+  { Rhômulo: "1x2", Rhenan: "1x2", Zanuto: "2x3", Amim: "1x1", JP: "1x2", Roger: "0x1", Heitor: "1x2", Estevão: "1x2", Willie: "2x1" },
+  { Rhômulo: "3x1", Rhenan: "3x0", Zanuto: "4x0", Amim: "2x0", JP: "3x0", Roger: "2x0", Heitor: "2x0", Estevão: "3x0", Willie: "2x0" },
+  { Rhômulo: "1x1", Rhenan: "1x2", Zanuto: "2x1", Amim: "2x1", JP: "1x1", Roger: "0x0", Heitor: "2x2", Estevão: "1x1", Willie: "1x1" },
+  { Rhômulo: "2x0", Rhenan: "2x0", Zanuto: "3x0", Amim: "2x1", JP: "3x0", Roger: "1x0", Heitor: "2x0", Estevão: "2x0", Willie: "3x1" },
+  { Rhômulo: "1x2", Rhenan: "1x1", Zanuto: "2x1", Amim: "2x2", JP: "1x1", Roger: "1x0", Heitor: "1x1", Estevão: "0x1", Willie: "2x0" },
+  { Rhômulo: "3x1", Rhenan: "2x0", Zanuto: "2x1", Amim: "3x1", JP: "2x0", Roger: "1x1", Heitor: "1x0", Estevão: "2x0", Willie: "2x0" },
 ];
 
 const knockoutSecondPredictions: Prediction[] = rawKnockoutSecondPredictions.flatMap((row, matchIndex) =>
