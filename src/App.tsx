@@ -496,7 +496,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "knockout-second-results-2026-06-30";
+const DATA_VERSION = "knockout-third-predictions-2026-07-01";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {
