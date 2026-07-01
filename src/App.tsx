@@ -127,6 +127,7 @@ const tabBackgroundImages: Record<string, string> = {
   ranking: "/moments/noruega-haaland.png",
   participant: "/moments/caboverde-comemoracao.png",
   matches: "/moments/uruguai-arabia.png",
+  finalized: "/moments/brasil-comemora-japao.png",
   predictions: "/moments/senegal-comemoracao.png",
   medals: "/moments/argentina-messi.png",
   longTerm: "/moments/brasil-neymar.png",
@@ -139,13 +140,14 @@ const tabBackgroundPositions: Record<string, string> = {
   ranking: "50% 18%",
   participant: "46% 25%",
   matches: "48% 42%",
+  finalized: "50% 28%",
   predictions: "54% 20%",
   medals: "50% 26%",
   longTerm: "50% 18%",
   moments: "48% 28%",
   import: "58% 38%",
 };
-type Tab = "dashboard" | "ranking" | "participant" | "matches" | "predictions" | "medals" | "longTerm" | "moments" | "import";
+type Tab = "dashboard" | "ranking" | "participant" | "matches" | "finalized" | "predictions" | "medals" | "longTerm" | "moments" | "import";
 
 type OfficialResultUpdate = {
   matchId: string;
@@ -202,7 +204,7 @@ const manualPreviousPositions: Record<string, number> = {
   rhomulo: 9,
   roger: 6,
   rhenan: 7,
-  willie: 8,
+  willie: 6,
 };
 
 function cx(...classes: Array<string | false | undefined>) {
@@ -223,6 +225,14 @@ function participantLineColor(participant: Participant, index: number) {
 
 function lineLegendFormatter(value: string | number, entry?: { color?: string }) {
   return <span style={{ color: entry?.color ?? "#e2e8f0", fontWeight: 800 }}>{value}</span>;
+}
+
+function finishedPredictionTone(status: ScoredPrediction["status"]) {
+  if (status === "Placar Exato") return "border-emerald-300/70 bg-emerald-400/25 text-emerald-50";
+  if (status === "Vencedor + Saldo") return "border-orange-300/70 bg-orange-400/25 text-orange-50";
+  if (status === "Vencedor/Empate") return "border-yellow-300/70 bg-yellow-300/25 text-yellow-50";
+  if (status === "Errou") return "border-red-300/70 bg-red-500/25 text-red-50";
+  return "border-white/10 bg-white/5 text-slate-300";
 }
 
 function IconButton({
@@ -552,6 +562,7 @@ export default function App() {
   const groups = ["Todos", ...Array.from(new Set(data.matches.map((match) => match.group)))];
   const leader = ranking[0];
   const completed = data.matches.filter((match) => match.result).length;
+  const finalizedMatches = data.matches.filter((match) => match.result);
   const upcomingPredictionMatches = data.matches.filter((match) => !match.result);
   const avgHitRate = ranking.length ? Math.round(ranking.reduce((sum, row) => sum + row.hitRate, 0) / ranking.length) : 0;
   const selected = data.participants.find((participant) => participant.id === selectedParticipant) ?? data.participants[0];
@@ -886,6 +897,7 @@ export default function App() {
           <SideNav icon={BarChart3} active={tab === "dashboard"} onClick={() => setTab("dashboard")}>Home</SideNav>
           <SideNav icon={Trophy} active={tab === "ranking"} onClick={() => setTab("ranking")}>Ranking</SideNav>
           <SideNav icon={Activity} active={tab === "matches"} onClick={() => setTab("matches")}>Jogos</SideNav>
+          <SideNav icon={ShieldCheck} active={tab === "finalized"} onClick={() => setTab("finalized")}>Finalizados</SideNav>
           <SideNav icon={FileSpreadsheet} active={tab === "predictions"} onClick={() => setTab("predictions")}>Palpites</SideNav>
           <SideNav icon={Users} active={tab === "participant"} onClick={() => setTab("participant")}>Participantes</SideNav>
           <SideNav icon={Medal} active={tab === "medals"} onClick={() => setTab("medals")}>Medalhas</SideNav>
@@ -910,6 +922,7 @@ export default function App() {
             <IconButton icon={Images} active={tab === "moments"} onClick={() => setTab("moments")}>Momentos</IconButton>
             <IconButton icon={Users} active={tab === "participant"} onClick={() => setTab("participant")}>Participantes</IconButton>
             <IconButton icon={Activity} active={tab === "matches"} onClick={() => setTab("matches")}>Jogos</IconButton>
+            <IconButton icon={ShieldCheck} active={tab === "finalized"} onClick={() => setTab("finalized")}>Finalizados</IconButton>
             <IconButton icon={FileSpreadsheet} active={tab === "predictions"} onClick={() => setTab("predictions")}>Palpites</IconButton>
           </nav>
         </div>
@@ -1434,6 +1447,81 @@ export default function App() {
                   Não há jogos pendentes no momento.
                 </div>
               )}
+            </Card>
+          </div>
+        )}
+
+        {tab === "finalized" && (
+          <div className="grid gap-5">
+            <section
+              className="hero-shell"
+              style={{ backgroundImage: `linear-gradient(90deg, rgba(2,11,19,.96) 0%, rgba(2,11,19,.74) 50%, rgba(2,11,19,.22) 100%), url(${tabBackgroundImages.finalized})`, backgroundPosition: tabBackgroundPositions.finalized }}
+            >
+              <div className="relative z-10 min-h-[210px] p-6 sm:p-8">
+                <p className="text-sm font-black uppercase tracking-[0.28em] text-amber-300">Conferência dos palpites</p>
+                <h1 className="mt-3 text-4xl font-black uppercase leading-none sm:text-5xl">Finalizados</h1>
+                <p className="mt-3 max-w-2xl text-sm font-semibold text-slate-200">
+                  Todos os jogos com resultado oficial e os palpites de cada participante coloridos pela pontuação.
+                </p>
+              </div>
+            </section>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Metric title="Jogos finalizados" value={String(finalizedMatches.length)} note="com resultado oficial" icon={ShieldCheck} />
+              <Metric title="Palpites avaliados" value={String(finalizedMatches.reduce((sum, match) => sum + data.predictions.filter((prediction) => prediction.matchId === match.id).length, 0))} note="já pontuados" icon={FileSpreadsheet} />
+              <Metric title="Placares exatos" value={String(totalExactScores)} note="cravados no bolão" icon={Trophy} />
+            </div>
+
+            <Card>
+              <div className="mb-4 flex flex-wrap gap-2 text-xs font-black">
+                <span className="rounded-full border border-emerald-300/70 bg-emerald-400/25 px-3 py-1 text-emerald-50">Verde: cravou</span>
+                <span className="rounded-full border border-yellow-300/70 bg-yellow-300/25 px-3 py-1 text-yellow-50">Amarelo: acertou vencedor/empate</span>
+                <span className="rounded-full border border-orange-300/70 bg-orange-400/25 px-3 py-1 text-orange-50">Laranja: vencedor + saldo</span>
+                <span className="rounded-full border border-red-300/70 bg-red-500/25 px-3 py-1 text-red-50">Vermelho: errou</span>
+              </div>
+              <SectionTitle title="Jogos finalizados" />
+              <div className="overflow-x-auto">
+                <table className="data-table min-w-[1180px]">
+                  <thead>
+                    <tr>
+                      <th>Jogo</th>
+                      <th>Resultado</th>
+                      {data.participants.map((participant) => (
+                        <th key={participant.id}>{participant.name}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {finalizedMatches.map((match) => (
+                      <tr key={match.id}>
+                        <td className="sticky left-0 z-10 min-w-[270px] bg-[#061423] font-black text-white">
+                          <span className="block text-xs font-black uppercase text-amber-300">{match.group}</span>
+                          {match.home.flag} {match.home.name} x {match.away.flag} {match.away.name}
+                        </td>
+                        <td className="text-center">
+                          <span className="score-pill">{scoreText(match.result)}</span>
+                        </td>
+                        {data.participants.map((participant) => {
+                          const prediction = data.predictions.find((item) => item.matchId === match.id && item.participantId === participant.id);
+                          if (!prediction) {
+                            return <td key={participant.id} className="text-center font-black text-slate-500">-</td>;
+                          }
+
+                          const scored = scorePrediction(prediction, match);
+                          return (
+                            <td key={participant.id} className="text-center">
+                              <span className={cx("inline-flex min-w-[72px] flex-col items-center rounded-md border px-2 py-1 font-black", finishedPredictionTone(scored.status))}>
+                                <span>{scoreText(prediction.score)}</span>
+                                <span className="text-[10px] uppercase opacity-80">{scored.points} pts</span>
+                              </span>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </Card>
           </div>
         )}
