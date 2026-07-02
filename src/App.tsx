@@ -51,100 +51,105 @@ const participantLineColors: Record<string, string> = {
 };
 const stadiumImage =
   "https://upload.wikimedia.org/wikipedia/commons/6/6e/Lusail_Stadium.jpg";
-const bolaoLogo = "/bolao-logo.png";
+const bolaoLogo = "/bolao-logo.webp";
 const avatarImages: Record<string, string> = {
-  amim: "/avatars/amim.png",
-  estevao: "/avatars/estevao.png",
-  heitor: "/avatars/heitor.png",
-  jp: "/avatars/jp.png",
-  rhenan: "/avatars/rhenan.png",
-  rhomulo: "/avatars/rhomulo.png",
-  roger: "/avatars/roger.png",
-  willie: "/avatars/willie.png",
-  zanuto: "/avatars/zanutto.png",
+  amim: "/avatars/amim.webp",
+  estevao: "/avatars/estevao.webp",
+  heitor: "/avatars/heitor.webp",
+  jp: "/avatars/jp.webp",
+  rhenan: "/avatars/rhenan.webp",
+  rhomulo: "/avatars/rhomulo.webp",
+  roger: "/avatars/roger.webp",
+  willie: "/avatars/willie.webp",
+  zanuto: "/avatars/zanutto.webp",
 };
 const fifaMomentCards = [
   {
-    title: "Brasil em alta",
+    title: "Bélgica vira festa",
     label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup",
-    image: "/moments/brasil-gol-japao.png",
-    position: "48% 28%",
+    image: "/moments/belgica-senegal-comemoracao.webp",
+    position: "46% 30%",
   },
   {
-    title: "Brasil comemora",
+    title: "México em êxtase",
     label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
-    image: "/moments/brasil-comemora-japao.png",
-    position: "50% 28%",
+    image: "/moments/mexico-comemoracao.webp",
+    position: "50% 32%",
   },
   {
-    title: "Haaland decide",
+    title: "Olise em destaque",
     label: "Último momento",
     href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/articles",
-    image: "/moments/noruega-haaland-bracos.png",
-    position: "50% 24%",
-  },
-  {
-    title: "França em campo",
-    label: "Último momento",
-    href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/articles",
-    image: "/moments/franca-suecia-bike.png",
+    image: "/moments/franca-suecia-bike.webp",
     position: "50% 38%",
+  },
+  {
+    title: "Brasil em alta",
+    label: "Último momento",
+    href: "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    image: "/moments/brasil-gol-japao.webp",
+    position: "48% 24%",
   },
 ];
 
 const worldCupGallery = [
-  { title: "Brasil em alta", image: "/moments/brasil-gol-japao.png", position: "48% 28%" },
-  { title: "Brasil comemora", image: "/moments/brasil-comemora-japao.png", position: "50% 28%" },
-  { title: "Haaland decide", image: "/moments/noruega-haaland-bracos.png", position: "50% 24%" },
-  { title: "França em campo", image: "/moments/franca-suecia-bike.png", position: "50% 38%" },
-  { title: "Brasil unido", image: "/moments/brasil-elenco-festa.png", position: "50% 28%" },
-  { title: "Paraguai comemora", image: "/moments/paraguai-comemoracao.png", position: "48% 28%" },
-  { title: "Joao Pedro vibra", image: "/moments/brasil-joao-pedro.png", position: "50% 30%" },
-  { title: "Vini Jr. decisivo", image: "/moments/brasil-vini-capa.png", position: "46% 20%" },
-  { title: "Canadá em festa", image: "/moments/canada-comemoracao.png", position: "46% 24%" },
-  { title: "Salah pelo Egito", image: "/moments/egito-salah.png", position: "44% 34%" },
-  { title: "Mbappe pela Franca", image: "/moments/franca-mbappe.png", position: "58% 22%" },
-  { title: "Haaland pela Noruega", image: "/moments/noruega-haaland.png", position: "50% 18%" },
-  { title: "Senegal em destaque", image: "/moments/senegal-comemoracao.png", position: "52% 20%" },
-  { title: "Cabo Verde em festa", image: "/moments/caboverde-comemoracao.png", position: "50% 28%" },
-  { title: "Uruguai em campo", image: "/moments/uruguai-arabia.png", position: "46% 45%" },
-  { title: "Vini Jr. com a Seleção", image: "/moments/brasil-vini.png", position: "54% 22%" },
-  { title: "Comemoração do Brasil", image: "/moments/brasil-comemoracao.png", position: "48% 30%" },
-  { title: "Messi em campo", image: "/moments/argentina-messi.png", position: "50% 28%" },
-  { title: "Brasil x Marrocos", image: "/moments/brasil-marrocos.png", position: "58% 38%" },
-  { title: "Torcida de Curaçao", image: "/moments/torcida-curacao.png", position: "50% 28%" },
-  { title: "Gakpo pela Holanda", image: "/moments/holanda-gakpo.png", position: "52% 24%" },
-  { title: "Comemoração da Espanha", image: "/moments/espanha-comemoracao.png", position: "58% 35%" },
-  { title: "Talento belga", image: "/moments/belgica-talento.png", position: "50% 24%" },
-  { title: "Bósnia em festa", image: "/moments/bosnia-comemoracao.png", position: "58% 32%" },
-  { title: "Neymar com a Seleção", image: "/moments/brasil-neymar.png", position: "50% 20%" },
+  { title: "Bélgica x Senegal", image: "/moments/belgica-senegal-comemoracao.webp", position: "46% 30%" },
+  { title: "México comemora", image: "/moments/mexico-comemoracao.webp", position: "50% 32%" },
+  { title: "Inglaterra comemora", image: "/moments/inglaterra-kane-comemoracao.webp", position: "44% 30%" },
+  { title: "Banco dos EUA em festa", image: "/moments/eua-banco-comemoracao.webp", position: "50% 35%" },
+  { title: "México x Equador", image: "/moments/mexico-equador-duelo.webp", position: "37% 34%" },
+  { title: "Brasil em alta", image: "/moments/brasil-gol-japao.webp", position: "48% 28%" },
+  { title: "Brasil comemora", image: "/moments/brasil-comemora-japao.webp", position: "50% 28%" },
+  { title: "Haaland decide", image: "/moments/noruega-haaland-bracos.webp", position: "50% 24%" },
+  { title: "França em campo", image: "/moments/franca-suecia-bike.webp", position: "50% 38%" },
+  { title: "Brasil unido", image: "/moments/brasil-elenco-festa.webp", position: "50% 28%" },
+  { title: "Paraguai comemora", image: "/moments/paraguai-comemoracao.webp", position: "48% 28%" },
+  { title: "Joao Pedro vibra", image: "/moments/brasil-joao-pedro.webp", position: "50% 30%" },
+  { title: "Vini Jr. decisivo", image: "/moments/brasil-vini-capa.webp", position: "46% 20%" },
+  { title: "Canadá em festa", image: "/moments/canada-comemoracao.webp", position: "46% 24%" },
+  { title: "Salah pelo Egito", image: "/moments/egito-salah.webp", position: "44% 34%" },
+  { title: "Mbappe pela Franca", image: "/moments/franca-mbappe.webp", position: "58% 22%" },
+  { title: "Haaland pela Noruega", image: "/moments/noruega-haaland.webp", position: "50% 18%" },
+  { title: "Senegal em destaque", image: "/moments/senegal-comemoracao.webp", position: "52% 20%" },
+  { title: "Cabo Verde em festa", image: "/moments/caboverde-comemoracao.webp", position: "50% 28%" },
+  { title: "Uruguai em campo", image: "/moments/uruguai-arabia.webp", position: "46% 45%" },
+  { title: "Vini Jr. com a Seleção", image: "/moments/brasil-vini.webp", position: "54% 22%" },
+  { title: "Comemoração do Brasil", image: "/moments/brasil-comemoracao.webp", position: "48% 30%" },
+  { title: "Messi em campo", image: "/moments/argentina-messi.webp", position: "50% 28%" },
+  { title: "Brasil x Marrocos", image: "/moments/brasil-marrocos.webp", position: "58% 38%" },
+  { title: "Torcida de Curaçao", image: "/moments/torcida-curacao.webp", position: "50% 28%" },
+  { title: "Gakpo pela Holanda", image: "/moments/holanda-gakpo.webp", position: "52% 24%" },
+  { title: "Comemoração da Espanha", image: "/moments/espanha-comemoracao.webp", position: "58% 35%" },
+  { title: "Talento belga", image: "/moments/belgica-talento.webp", position: "50% 24%" },
+  { title: "Bósnia em festa", image: "/moments/bosnia-comemoracao.webp", position: "58% 32%" },
+  { title: "Neymar com a Seleção", image: "/moments/brasil-neymar.webp", position: "50% 20%" },
 ];
 
 const tabBackgroundImages: Record<string, string> = {
-  dashboard: "/moments/brasil-gol-japao.png",
-  ranking: "/moments/noruega-haaland.png",
-  participant: "/moments/caboverde-comemoracao.png",
-  matches: "/moments/uruguai-arabia.png",
-  finalized: "/moments/brasil-comemora-japao.png",
-  predictions: "/moments/senegal-comemoracao.png",
-  medals: "/moments/argentina-messi.png",
-  longTerm: "/moments/brasil-neymar.png",
-  moments: "/moments/brasil-comemoracao.png",
-  import: "/moments/brasil-marrocos.png",
+  dashboard: "/moments/brasil-gol-japao.webp",
+  ranking: "/moments/noruega-haaland.webp",
+  participant: "/moments/caboverde-comemoracao.webp",
+  matches: "/moments/uruguai-arabia.webp",
+  finalized: "/moments/brasil-comemora-japao.webp",
+  predictions: "/moments/senegal-comemoracao.webp",
+  medals: "/moments/inglaterra-kane-comemoracao.webp",
+  longTerm: "/moments/brasil-neymar.webp",
+  moments: "/moments/inglaterra-kane-comemoracao.webp",
+  import: "/moments/brasil-marrocos.webp",
 };
 
 const tabBackgroundPositions: Record<string, string> = {
-  dashboard: "48% 28%",
+  dashboard: "48% 18%",
   ranking: "50% 18%",
   participant: "46% 25%",
   matches: "48% 42%",
   finalized: "50% 28%",
   predictions: "54% 20%",
-  medals: "50% 26%",
+  medals: "46% 22%",
   longTerm: "50% 18%",
-  moments: "48% 28%",
+  moments: "44% 30%",
   import: "58% 38%",
 };
 type Tab = "dashboard" | "ranking" | "participant" | "matches" | "finalized" | "predictions" | "medals" | "longTerm" | "moments" | "import";
@@ -195,6 +200,9 @@ const localVerifiedResults: Record<string, Score> = {
   "holanda-marrocos": { home: 1, away: 1 },
   "costadomarfim-noruega": { home: 1, away: 2 },
   "franca-suecia": { home: 3, away: 0 },
+  "inglaterra-rdcongo": { home: 2, away: 1 },
+  "belgica-senegal": { home: 3, away: 2 },
+  "estadosunidos-bosniaeherzegovina": { home: 2, away: 0 },
 };
 
 const pendingGoogleFixtureKeys = new Set<string>([
@@ -233,6 +241,13 @@ function finishedPredictionTone(status: ScoredPrediction["status"]) {
   if (status === "Vencedor/Empate") return "border-yellow-300/70 bg-yellow-300/25 text-yellow-50";
   if (status === "Errou") return "border-red-300/70 bg-red-500/25 text-red-50";
   return "border-white/10 bg-white/5 text-slate-300";
+}
+
+function rankingPositionTone(position: number) {
+  if (position === 1) return "border-amber-300 bg-amber-300 text-slate-950 shadow-[0_0_18px_rgba(251,191,36,.35)]";
+  if (position === 2) return "border-slate-200 bg-slate-200 text-slate-950 shadow-[0_0_18px_rgba(226,232,240,.25)]";
+  if (position === 9) return "border-red-400 bg-red-500 text-white shadow-[0_0_18px_rgba(239,68,68,.28)]";
+  return "border-white/10 bg-white/5 text-white";
 }
 
 function IconButton({
@@ -441,8 +456,8 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
             id: toId(`${cell(row, ["Grupo"])}-${cell(row, ["Jogo"])}`),
             round: index + 1,
             group: groupName(cell(row, ["Grupo"])),
-            home: { name: teams.home, flag: "🏳️" },
-            away: { name: teams.away, flag: "🏳️" },
+            home: { name: teams.home, flag: "???" },
+            away: { name: teams.away, flag: "???" },
             result: parseScore(cell(row, ["Resultado Real", "Resultado"])),
           };
         });
@@ -472,8 +487,8 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
         id: toId(`${cell(row, ["Grupo"]) || index}-${home}-${away}`),
         round: index + 1,
         group: groupName(cell(row, ["Grupo"]) ?? index + 1),
-        home: { name: home, flag: "🏳️" },
-        away: { name: away, flag: "🏳️" },
+        home: { name: home, flag: "???" },
+        away: { name: away, flag: "???" },
         result: parseScore(cell(row, ["Resultado Real", "Resultado"])),
       };
     });
@@ -496,7 +511,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "knockout-third-predictions-2026-07-01";
+const DATA_VERSION = "roger-third-knockout-and-usa-bosnia-result-2026-07-01";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {
@@ -1130,6 +1145,27 @@ export default function App() {
             </div>
 
             <Card>
+              <SectionTitle title="Premiação" />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-lg border border-amber-300 bg-gradient-to-br from-amber-200 via-amber-400 to-yellow-600 p-4 text-slate-950 shadow-[0_0_28px_rgba(251,191,36,.24)]">
+                  <p className="text-xs font-black uppercase tracking-[0.2em]">1º lugar · Ouro</p>
+                  <p className="mt-2 text-4xl font-black">R$ 135,00</p>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-gradient-to-br from-slate-50 via-slate-300 to-slate-500 p-4 text-slate-950 shadow-[0_0_28px_rgba(226,232,240,.18)]">
+                  <p className="text-xs font-black uppercase tracking-[0.2em]">2º lugar · Prata</p>
+                  <p className="mt-2 text-4xl font-black">R$ 40,00</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="border-amber-300/30 bg-amber-300/10">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-amber-200">Critérios de desempate</p>
+              <p className="mt-2 text-sm font-bold text-slate-100">
+                Pontos; mais placares exatos; mais jogos acertados.
+              </p>
+            </Card>
+
+            <Card>
               <SectionTitle title="Ranking completo" />
               <RankingTable rows={ranking} onSelect={(id) => { setSelectedParticipant(id); setTab("participant"); }} />
             </Card>
@@ -1155,7 +1191,7 @@ export default function App() {
           <div className="grid gap-5">
             <section
               className="hero-shell"
-              style={{ backgroundImage: `linear-gradient(90deg, rgba(2,11,19,.96) 0%, rgba(2,11,19,.68) 52%, rgba(2,11,19,.18) 100%), url(${worldCupGallery[1].image})`, backgroundPosition: worldCupGallery[1].position }}
+              style={{ backgroundImage: `linear-gradient(90deg, rgba(2,11,19,.96) 0%, rgba(2,11,19,.68) 52%, rgba(2,11,19,.18) 100%), url(${tabBackgroundImages.moments})`, backgroundPosition: tabBackgroundPositions.moments }}
             >
               <div className="relative z-10 min-h-[240px] p-6 sm:p-8">
                 <p className="text-sm font-black uppercase tracking-[0.28em] text-amber-300">Galeria visual</p>
@@ -1183,7 +1219,11 @@ export default function App() {
           <div className="grid gap-5">
             <section
               className="hero-shell"
-              style={{ backgroundImage: `linear-gradient(90deg, rgba(2,11,19,.96) 0%, rgba(2,11,19,.72) 50%, rgba(2,11,19,.25) 100%), url(${tabBackgroundImages.medals})`, backgroundPosition: tabBackgroundPositions.medals }}
+              style={{
+                backgroundImage: `linear-gradient(90deg, rgba(2,11,19,.96) 0%, rgba(2,11,19,.72) 50%, rgba(2,11,19,.25) 100%), url(${tabBackgroundImages.medals})`,
+                backgroundPosition: tabBackgroundPositions.medals,
+                backgroundSize: "cover",
+              }}
             >
               <div className="relative z-10 min-h-[210px] p-6 sm:p-8">
                 <p className="text-sm font-black uppercase tracking-[0.28em] text-amber-300">Modalidades do bolão</p>
@@ -1720,14 +1760,18 @@ function RankingTable({ rows, compact, onSelect }: { rows: ReturnType<typeof bui
             <th>Pontos</th>
             {!compact && <th>Jogos acertados</th>}
             {!compact && <th>Placar exato</th>}
-            {!compact && <th>Aproveitamento</th>}
+            {!compact && <th>Aproveitamento pts</th>}
             <th>Variação</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
             <tr key={row.participant.id} className="cursor-pointer" onClick={() => onSelect(row.participant.id)}>
-              <td className="font-black">#{row.position}</td>
+              <td>
+                <span className={cx("inline-flex min-w-10 justify-center rounded-full border px-2.5 py-1 text-sm font-black", rankingPositionTone(row.position))}>
+                  #{row.position}
+                </span>
+              </td>
               <td>
                 <span className="inline-flex items-center gap-2 font-bold">
                   <img src={participantAvatar(row.participant)} alt={row.participant.name} className="h-9 w-9 rounded-full border-2 border-amber-300 object-cover shadow-lg" />

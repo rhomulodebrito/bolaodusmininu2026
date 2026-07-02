@@ -365,7 +365,7 @@ const knockoutSecondRows = [
   ["Mata-mata", "Estados Unidos", "Bósnia e Herzegovina"],
 ] as const;
 
-const knockoutSecondResults = ["1x2", "3x0"];
+const knockoutSecondResults = ["1x2", "3x0", "", "2x1", "3x2", "2x0"];
 
 const knockoutSecondMatches: Match[] = knockoutSecondRows.map(([stage, home, away], index) => ({
   id: `KO2-${index + 1}`,
@@ -411,12 +411,12 @@ const knockoutThirdMatches: Match[] = knockoutThirdRows.map(([stage, home, away]
 }));
 
 const rawKnockoutThirdPredictions: Array<Record<string, string>> = [
-  { Amim: "3x1", JP: "2x0", Estevão: "2x0", Rhenan: "3x1", Willie: "3x0", Rhômulo: "1x0", Heitor: "2x1", Zanuto: "2x0" },
-  { Amim: "2x1", JP: "2x1", Estevão: "2x1", Rhenan: "1x0", Willie: "1x2", Rhômulo: "2x1", Heitor: "1x1", Zanuto: "2x1" },
-  { Amim: "3x0", JP: "2x1", Estevão: "1x0", Rhenan: "2x1", Willie: "1x0", Rhômulo: "1x0", Heitor: "2x0", Zanuto: "2x1" },
-  { Amim: "1x1", JP: "1x1", Estevão: "1x2", Rhenan: "1x1", Willie: "1x1", Rhômulo: "0x2", Heitor: "1x3", Zanuto: "1x1" },
-  { Amim: "2x0", JP: "4x0", Estevão: "3x0", Rhenan: "2x0", Willie: "4x0", Rhômulo: "3x0", Heitor: "2x1", Zanuto: "2x0" },
-  { Amim: "3x1", JP: "2x0", Estevão: "2x1", Rhenan: "1x0", Willie: "2x1", Rhômulo: "2x2", Heitor: "2x1", Zanuto: "2x1" },
+  { Amim: "3x1", JP: "2x0", Estevão: "2x0", Rhenan: "3x1", Willie: "3x0", Rhômulo: "1x0", Heitor: "2x1", Zanuto: "2x0", Roger: "3x0" },
+  { Amim: "2x1", JP: "2x1", Estevão: "2x1", Rhenan: "1x0", Willie: "1x2", Rhômulo: "2x1", Heitor: "1x1", Zanuto: "2x1", Roger: "2x0" },
+  { Amim: "3x0", JP: "2x1", Estevão: "1x0", Rhenan: "2x1", Willie: "1x0", Rhômulo: "1x0", Heitor: "2x0", Zanuto: "2x1", Roger: "1x0" },
+  { Amim: "1x1", JP: "1x1", Estevão: "1x2", Rhenan: "1x1", Willie: "1x1", Rhômulo: "0x2", Heitor: "1x3", Zanuto: "1x1", Roger: "1x2" },
+  { Amim: "2x0", JP: "4x0", Estevão: "3x0", Rhenan: "2x0", Willie: "4x0", Rhômulo: "3x0", Heitor: "2x1", Zanuto: "2x0", Roger: "4x0" },
+  { Amim: "3x1", JP: "2x0", Estevão: "2x1", Rhenan: "1x0", Willie: "2x1", Rhômulo: "2x2", Heitor: "2x1", Zanuto: "2x1", Roger: "2x0" },
 ];
 
 const knockoutThirdPredictions: Prediction[] = rawKnockoutThirdPredictions.flatMap((row, matchIndex) =>

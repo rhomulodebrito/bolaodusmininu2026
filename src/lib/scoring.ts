@@ -107,7 +107,9 @@ export function buildRanking(
       const winnerHits = scored.filter((item) => item.points > 0 && item.status !== "Placar Exato").length;
       const errors = scored.filter((item) => item.status === "Errou").length;
       const computedMatches = completedMatches.length;
-      const hitRate = computedMatches ? Math.round(((exactScores + winnerHits) / computedMatches) * 100) : 0;
+      const computedPredictions = scored.filter((item) => item.match.result).length;
+      const possibleMatchPoints = computedPredictions * 10;
+      const hitRate = possibleMatchPoints ? Math.round((matchPoints / possibleMatchPoints) * 100) : 0;
       const previousPosition = previous.find((item) => item.participantId === participant.id)?.previousPosition ?? 1;
 
       return {
