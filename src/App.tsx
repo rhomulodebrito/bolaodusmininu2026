@@ -95,6 +95,9 @@ const fifaMomentCards = [
 ];
 
 const worldCupGallery = [
+  { title: "Egito em festa", image: "/moments/egito-comemoracao.webp", position: "56% 34%" },
+  { title: "Argentina comemora", image: "/moments/argentina-jogador-comemoracao.webp", position: "40% 30%" },
+  { title: "Colômbia x Gana", image: "/moments/colombia-gana-duelo.webp", position: "46% 36%" },
   { title: "Bélgica x Senegal", image: "/moments/belgica-senegal-comemoracao.webp", position: "46% 30%" },
   { title: "México comemora", image: "/moments/mexico-comemoracao.webp", position: "50% 32%" },
   { title: "Inglaterra comemora", image: "/moments/inglaterra-kane-comemoracao.webp", position: "44% 30%" },
@@ -203,6 +206,11 @@ const localVerifiedResults: Record<string, Score> = {
   "inglaterra-rdcongo": { home: 2, away: 1 },
   "belgica-senegal": { home: 3, away: 2 },
   "estadosunidos-bosniaeherzegovina": { home: 2, away: 0 },
+  "espanha-austria": { home: 3, away: 0 },
+  "portugal-croacia": { home: 2, away: 1 },
+  "suica-argelia": { home: 2, away: 0 },
+  "australia-egito": { home: 1, away: 1 },
+  "colombia-gana": { home: 1, away: 0 },
 };
 
 const pendingGoogleFixtureKeys = new Set<string>([
@@ -511,7 +519,7 @@ function importWorkbook(file: File, onData: (data: PoolData) => void) {
   reader.readAsArrayBuffer(file);
 }
 
-const DATA_VERSION = "roger-third-knockout-and-usa-bosnia-result-2026-07-01";
+const DATA_VERSION = "colombia-gana-result-2026-07-04";
 
 async function fetchOfficialResults(matches: Match[], apiKey: string, leagueId: string, season: string): Promise<OfficialResultResponse> {
   const response = await fetch("/api/update-results", {

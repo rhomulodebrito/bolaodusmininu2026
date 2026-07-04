@@ -163,6 +163,11 @@ const knownPublicResults: Array<{ keys: string[]; result: Score }> = [
   { keys: ["inglaterra-rdcongo", "england-drcongo"], result: { home: 2, away: 1 } },
   { keys: ["belgica-senegal", "belgium-senegal"], result: { home: 3, away: 2 } },
   { keys: ["estadosunidos-bosniaeherzegovina", "unitedstates-bosniaandherzegovina", "usa-bosnia"], result: { home: 2, away: 0 } },
+  { keys: ["espanha-austria", "spain-austria"], result: { home: 3, away: 0 } },
+  { keys: ["portugal-croacia", "portugal-croatia"], result: { home: 2, away: 1 } },
+  { keys: ["suica-argelia", "switzerland-algeria"], result: { home: 2, away: 0 } },
+  { keys: ["australia-egito", "australia-egypt"], result: { home: 1, away: 1 } },
+  { keys: ["colombia-gana", "colombia-ghana"], result: { home: 1, away: 0 } },
 ];
 
 function normalize(value: string) {

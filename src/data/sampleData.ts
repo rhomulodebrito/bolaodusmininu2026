@@ -402,12 +402,15 @@ const knockoutThirdRows = [
   ["Mata-mata", "Colômbia", "Gana"],
 ] as const;
 
+const knockoutThirdResults = ["3x0", "2x1", "2x0", "1x1", "", "1x0"];
+
 const knockoutThirdMatches: Match[] = knockoutThirdRows.map(([stage, home, away], index) => ({
   id: `KO3-${index + 1}`,
   round: matches.length + secondRoundMatches.length + thirdRoundMatches.length + knockoutMatches.length + knockoutSecondMatches.length + index + 1,
   group: stage,
   home: team(home),
   away: team(away),
+  result: knockoutThirdResults[index] ? score(knockoutThirdResults[index]) : undefined,
 }));
 
 const rawKnockoutThirdPredictions: Array<Record<string, string>> = [
