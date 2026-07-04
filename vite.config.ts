@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fetchApiFootballUpdates, fetchPublicWebUpdates } from "./server/apiFootball";
 import { fetchFifaMoments } from "./server/fifaMoments";
+import { WorldCupUpdateAgent } from "./server/worldCupAgent";
 
 export default defineConfig({
   plugins: [
@@ -56,6 +57,32 @@ export default defineConfig({
                 res.statusCode = 502;
                 res.end(JSON.stringify({ error: error instanceof Error ? error.message : "Não consegui buscar os resultados." }));
               }
+            }
+          });
+        });
+
+        server.middlewares.use("/api/cup-agent", async (req, res) => {
+          if (req.method !== "POST") {
+            res.statusCode = 405;
+            res.end(JSON.stringify({ error: "Method not allowed" }));
+            return;
+          }
+
+          let body = "";
+          req.on("data", (chunk) => {
+            body += chunk;
+          });
+          req.on("end", async () => {
+            res.setHeader("Content-Type", "application/json");
+
+            try {
+              const payload = JSON.parse(body || "{}");
+              const agent = new WorldCupUpdateAgent();
+              const result = await agent.run(payload.matches ?? []);
+              res.end(JSON.stringify({ ...result, source: "Agente MSN + Lance", fixturesFound: result.log.found }));
+            } catch (error) {
+              res.statusCode = 502;
+              res.end(JSON.stringify({ error: error instanceof Error ? error.message : "Falha ao executar agente de atualização." }));
             }
           });
         });
