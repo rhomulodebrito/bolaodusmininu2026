@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fetchApiFootballUpdates, fetchPublicWebUpdates } from "./server/apiFootball";
 import { fetchFifaMoments } from "./server/fifaMoments";
-import { WorldCupUpdateAgent } from "./server/worldCupAgent";
+import { WorldCupUpdateAgent } from "./server/worldCupAgent/index";
 
 export default defineConfig({
   plugins: [
