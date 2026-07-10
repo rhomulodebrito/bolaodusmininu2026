@@ -1,18 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fetchApiFootballUpdates, fetchPublicWebUpdates } from "./server/apiFootball";
-import { fetchFifaMoments } from "./server/fifaMoments";
 
 export default defineConfig({
   plugins: [
     {
       name: "local-api-football-proxy",
       configureServer(server) {
-        server.middlewares.use("/api/fifa-moments", async (_req, res) => {
-          res.setHeader("Content-Type", "application/json");
-          res.end(JSON.stringify({ moments: await fetchFifaMoments() }));
-        });
-
         server.middlewares.use("/api/update-results", async (req, res) => {
           if (req.method !== "POST") {
             res.statusCode = 405;
